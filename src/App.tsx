@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {unwrapResult} from "@reduxjs/toolkit";
 import logo from './logo.svg';
 import './App.css';
+import {login} from "./reducers";
+import {useAppDispatch} from "./store";
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(login())
+      .then(unwrapResult)
+      .catch((error) => {
+        console.log(error)
+      });
+  })
+
   return (
     <div className="App">
       <header className="App-header">
